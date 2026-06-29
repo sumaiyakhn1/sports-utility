@@ -13,6 +13,8 @@ import ExcelImport from "../pages/ExcelImport";
 import AddStudent from "../pages/AddStudent";
 import EditStudent from "../pages/EditStudent";
 import ViewStudent from "../pages/ViewStudent";
+import Gallery from "../pages/Gallery.tsx";
+import Analytics from "../pages/Analytics.tsx";
 
 import Login from "../pages/Login";
 
@@ -57,6 +59,21 @@ export default function AppRoutes() {
           />
 
           <Route
+            path="achievements"
+            element={<Students />}
+          />
+
+          <Route
+            path="gallery"
+            element={<Gallery />}
+          />
+
+          <Route
+            path="analytics"
+            element={<Analytics />}
+          />
+
+          <Route
             path="students/add"
             element={<AddStudent />}
           />
@@ -77,7 +94,7 @@ export default function AppRoutes() {
           />
 
           <Route
-              path="/settings"
+              path="settings"
               element={<Settings />}
           />
 

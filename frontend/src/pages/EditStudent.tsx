@@ -103,7 +103,7 @@ export default function EditStudent() {
         if (certificate) await uploadCertificate(achievementId, certificate);
       }
       toast.success("Student updated successfully");
-      navigate("/students");
+      navigate("/achievements");
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.message ?? "Update failed");
@@ -128,14 +128,14 @@ export default function EditStudent() {
       {/* Header */}
       <div className="flex items-center gap-4">
         <button
-          onClick={() => navigate("/students")}
-          className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition"
+          onClick={() => navigate("/achievements")}
+          className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition cursor-pointer"
         >
           <ArrowLeft size={16} />
         </button>
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Edit Student Record</h1>
-          <p className="text-sm text-slate-400 mt-0.5">Update student profile and achievement details</p>
+          <p className="text-sm text-slate-404 mt-0.5">Update student profile and achievement details</p>
         </div>
       </div>
 
@@ -152,7 +152,7 @@ export default function EditStudent() {
           certificate={certificate}
           setCertificate={setCertificate}
         />
-        <ActionButtons loading={loading} onCancel={() => navigate("/students")} />
+        <ActionButtons loading={loading} onCancel={() => navigate("/achievements")} />
       </form>
     </div>
   );

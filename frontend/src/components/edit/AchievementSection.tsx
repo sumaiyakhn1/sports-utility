@@ -8,12 +8,12 @@ interface Props {
 }
 
 const inputClass =
-  "w-full border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition";
+  "w-full border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition";
 
 function FormField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-slate-600 mb-1.5">{label}</label>
+      <label className="block text-sm font-semibold text-slate-650 mb-1.5">{label}</label>
       {children}
     </div>
   );
@@ -21,7 +21,7 @@ function FormField({ label, children }: { label: string; children: React.ReactNo
 
 export default function AchievementSection({ formData, handleChange, certificate, setCertificate }: Props) {
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
+    <div className="bg-white border border-slate-200/80 rounded-2xl shadow-xs overflow-hidden">
       <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50">
         <h2 className="text-sm font-bold text-slate-800">Achievement Information</h2>
         <p className="text-xs text-slate-400 mt-0.5">Update sports performance and certificate</p>
@@ -44,7 +44,7 @@ export default function AchievementSection({ formData, handleChange, certificate
             <input type="text" name="results" value={formData.results} onChange={handleChange} placeholder="Gold / Silver / Participation..." className={inputClass} />
           </FormField>
           <FormField label="Upload Certificate">
-            <label className="flex items-center gap-3 border-2 border-dashed border-slate-200 rounded-xl px-4 py-3 cursor-pointer hover:border-emerald-400 hover:bg-emerald-50/30 transition group">
+            <label className="flex items-center gap-3 border-2 border-dashed border-slate-200 rounded-xl px-4 py-3 cursor-pointer hover:border-emerald-500 hover:bg-emerald-50/20 transition group">
               <input
                 type="file"
                 accept=".pdf,image/*"

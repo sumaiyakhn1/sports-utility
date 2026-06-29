@@ -42,7 +42,7 @@ function FormField({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-slate-600 mb-1.5">
+      <label className="block text-sm font-semibold text-slate-650 mb-1.5">
         {label}
         {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
@@ -52,7 +52,7 @@ function FormField({
 }
 
 const inputClass =
-  "w-full border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition";
+  "w-full border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 placeholder-slate-400 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition";
 
 export default function AddStudent() {
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ export default function AddStudent() {
 
       toast.success("Student Record Added Successfully");
       resetForm();
-      navigate("/students");
+      navigate("/achievements");
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.message ?? "Something went wrong");
@@ -114,23 +114,23 @@ export default function AddStudent() {
       {/* Header */}
       <div className="flex items-center gap-4">
         <button
-          onClick={() => navigate("/students")}
-          className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition"
+          onClick={() => navigate("/achievements")}
+          className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:text-slate-750 transition cursor-pointer"
         >
           <ArrowLeft size={16} />
         </button>
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Add Student Record</h1>
-          <p className="text-sm text-slate-400 mt-0.5">Create a new student profile with achievements</p>
+          <p className="text-sm text-slate-405 mt-0.5">Create a new student profile with achievements</p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Student Information */}
-        <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-slate-200/80 rounded-2xl shadow-xs overflow-hidden">
           <div className="flex items-center gap-3 px-6 py-4 border-b border-slate-100 bg-slate-50/50">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-              <User size={15} className="text-blue-600" />
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+              <User size={15} className="text-emerald-600" />
             </div>
             <div>
               <h2 className="text-sm font-bold text-slate-800">Student Information</h2>
@@ -198,7 +198,7 @@ export default function AddStudent() {
               </FormField>
 
               <FormField label="Student Photo">
-                <label className="flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-xl p-4 cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition group">
+                <label className="flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-xl p-4 cursor-pointer hover:border-emerald-500 hover:bg-emerald-50/20 transition group">
                   <input
                     type="file"
                     accept="image/*"
@@ -214,14 +214,14 @@ export default function AddStudent() {
                         alt="Preview"
                         className="h-20 w-20 rounded-xl object-cover border-2 border-white shadow"
                       />
-                      <p className="text-xs font-medium text-slate-600">{photo.name}</p>
-                      <p className="text-xs text-blue-500">Click to change</p>
+                      <p className="text-xs font-semibold text-emerald-700">{photo.name}</p>
+                      <p className="text-xs text-emerald-500">Click to change</p>
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center gap-1.5 text-slate-400 group-hover:text-blue-500 transition">
+                    <div className="flex flex-col items-center gap-1.5 text-slate-450 group-hover:text-emerald-600 transition">
                       <ImageIcon size={24} strokeWidth={1.5} />
                       <p className="text-xs font-medium">Click to upload photo</p>
-                      <p className="text-[11px]">PNG, JPG up to 2MB</p>
+                      <p className="text-[11px] text-slate-400">PNG, JPG up to 2MB</p>
                     </div>
                   )}
                 </label>
@@ -231,7 +231,7 @@ export default function AddStudent() {
         </div>
 
         {/* Achievement Information */}
-        <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-slate-200/80 rounded-2xl shadow-xs overflow-hidden">
           <div className="flex items-center gap-3 px-6 py-4 border-b border-slate-100 bg-slate-50/50">
             <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
               <Trophy size={15} className="text-emerald-600" />
@@ -299,7 +299,7 @@ export default function AddStudent() {
               </FormField>
 
               <FormField label="Certificate">
-                <label className="flex items-center gap-3 border-2 border-dashed border-slate-200 rounded-xl px-4 py-3 cursor-pointer hover:border-emerald-400 hover:bg-emerald-50/30 transition group">
+                <label className="flex items-center gap-3 border-2 border-dashed border-slate-200 rounded-xl px-4 py-3 cursor-pointer hover:border-emerald-500 hover:bg-emerald-50/20 transition group">
                   <input
                     type="file"
                     accept=".pdf,image/*"
@@ -334,15 +334,15 @@ export default function AddStudent() {
         <div className="flex items-center justify-end gap-3 pb-4">
           <button
             type="button"
-            onClick={() => navigate("/students")}
-            className="px-5 py-2.5 text-sm font-semibold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition"
+            onClick={() => navigate("/achievements")}
+            className="px-5 py-2.5 text-sm font-semibold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white rounded-xl transition flex items-center gap-2"
+            className="px-6 py-2.5 text-sm font-bold bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-300 text-white rounded-xl transition flex items-center gap-2 cursor-pointer shadow-xs"
           >
             {loading ? (
               <>

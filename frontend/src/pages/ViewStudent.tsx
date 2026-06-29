@@ -16,7 +16,7 @@ import {
   Pencil,
 } from "lucide-react";
 
-const BASE_URL = "http://localhost:5000";
+
 
 function InfoItem({ label, value, icon: Icon }: { label: string; value?: string; icon?: any }) {
   return (
@@ -82,8 +82,8 @@ export default function ViewStudent() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button
-            onClick={() => navigate("/students")}
-            className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition"
+            onClick={() => navigate("/achievements")}
+            className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition cursor-pointer"
           >
             <ArrowLeft size={16} />
           </button>
@@ -94,7 +94,7 @@ export default function ViewStudent() {
         </div>
         <button
           onClick={() => navigate(`/students/edit/${id}`)}
-          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition shadow-sm"
+          className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition shadow-xs cursor-pointer"
         >
           <Pencil size={14} />
           Edit
@@ -202,7 +202,7 @@ export default function ViewStudent() {
                         href={achievement.certificate}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition cursor-pointer"
                       >
                         <ExternalLink size={13} />
                         View Certificate

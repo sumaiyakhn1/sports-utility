@@ -212,6 +212,7 @@ if (photoImage && row.admissionNo) {
     row.photo = await saveImage({
     folder: "photos",
     fileName: row.admissionNo,
+    extension: photoImage.extension,
     buffer: photoImage.buffer,
 });
 
@@ -224,6 +225,7 @@ if (certificateImage && row.admissionNo) {
     row.certificate = await saveImage({
     folder: "certificates",
     fileName: `${row.admissionNo}-${Date.now()}`,
+    extension: certificateImage.extension,
     buffer: certificateImage.buffer,
 });
 

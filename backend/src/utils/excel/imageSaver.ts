@@ -1,6 +1,13 @@
 import cloudinary from "../../config/cloudinary";
 import streamifier from "streamifier";
 
+interface SaveImageOptions {
+    folder: "photos" | "certificates";
+    fileName: string;
+    extension: string;
+    buffer: Buffer;
+}
+
 export const saveImage = async ({
     folder,
     fileName,

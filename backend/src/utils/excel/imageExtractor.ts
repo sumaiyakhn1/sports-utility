@@ -1,52 +1,43 @@
 import ExcelJS from "exceljs";
 
 export interface ExtractedImage {
-    row: number;
-    col: number;
-    buffer: Buffer;
-    extension: string;
+  row: number;
+  col: number;
+  buffer: Buffer;
+  extension: string;
 }
 
 export const extractImages = async (
-    fileBuffer: Buffer
+  fileBuffer: Buffer
 ): Promise<Map<string, ExtractedImage>> => {
+  const workbook = new ExcelJS.Workbook();
 
-    const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(fileBuffer as any);
 
-    await workbook.xlsx.load(fileBuffer);
+  const imageMap = new Map<string, ExtractedImage>();
 
-    const imageMap = new Map<string, ExtractedImage>();
+  workbook.eachSheet((worksheet) => {
+    const images = worksheet.getImages();
 
-    workbook.eachSheet((worksheet) => {
+    for (const image of images) {
+      const img = workbook.getImage(Number(image.imageId));
 
-        const images = worksheet.getImages();
+      if (!img) continue;
 
-        console.log("Found Images:", images.length);
+      // Skip if this image doesn't have a buffer
+      if (!("buffer" in img) || !img.buffer) continue;
 
-        for (const image of images) {
+      const row = image.range.tl.nativeRow + 1;
+      const col = image.range.tl.nativeCol + 1;
 
-            console.log(image);
+      imageMap.set(`${row}-${col}`, {
+        row,
+        col,
+        buffer: img.buffer as unknown as Buffer,
+        extension: img.extension,
+      });
+    }
+  });
 
-            const img = workbook.getImage(image.imageId);
-
-            if (!img) continue;
-
-            const row = image.range.tl.nativeRow + 1;
-            const col = image.range.tl.nativeCol + 1;
-
-            console.log(
-                `Image -> Row ${row} Column ${col}`
-            );
-
-            imageMap.set(`${row}-${col}`, {
-                row,
-                col,
-                buffer: img.buffer,
-                extension: img.extension,
-            });
-        }
-
-    });
-
-    return imageMap;
+  return imageMap;
 };

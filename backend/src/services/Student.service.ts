@@ -8,26 +8,44 @@ import ApiError from "../utils/ApiError";
 export const createStudent = async (data: Partial<IStudent>) => {
     const admissionNo = data.admissionNo?.trim();
 
-    const student = await Student.findOneAndUpdate(
-        {
-            admissionNo,
-            isDeleted: false,
-        },
-        {
-            $set: {
-                ...data,
-                admissionNo,
-            },
-        },
-        {
-            new: true,
-            upsert: true,
-            runValidators: true,
-            setDefaultsOnInsert: true,
-        }
-    );
+    // Check if student already exists
+    const existingStudent = await Student.findOne({
+        admissionNo,
+        isDeleted: false,
+    });
 
-    return student;
+    let student;
+
+    if (existingStudent) {
+        student = await Student.findByIdAndUpdate(
+            existingStudent._id,
+            {
+                $set: {
+                    ...data,
+                    admissionNo,
+                },
+            },
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
+
+        return {
+            student,
+            isNew: false,
+        };
+    }
+
+    student = await Student.create({
+        ...data,
+        admissionNo,
+    });
+
+    return {
+        student,
+        isNew: true,
+    };
 };
 
 export const getAllStudents = async (

@@ -95,8 +95,8 @@ export const importRows = async (
             // created or updated
 
             if (
-                student.createdAt.getTime() ===
-                student.updatedAt.getTime()
+                student.createdAt!.getTime() ===
+                student.updatedAt!.getTime()
             ) {
                 report.studentsCreated++;
             } else {

@@ -8,6 +8,9 @@ export interface IStudent extends Document {
     phone?: string;
     photo?: string;
     isDeleted: boolean;
+
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 const studentSchema = new Schema<IStudent>(

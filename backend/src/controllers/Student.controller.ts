@@ -11,14 +11,16 @@ export const createStudent = catchAsync(
 
     async (req: Request, res: Response) => {
 
-        const student = await studentService.createStudent(req.body);
+        const result = await studentService.createStudent(req.body);
 
-        res.status(201).json(
+        res.status(result.isNew ? 201 : 200).json(
 
             new ApiResponse(
-                201,
-                "Student created successfully",
-                student
+                result.isNew ? 201 : 200,
+                result.isNew
+                    ? "Student created successfully"
+                    : "Student updated successfully",
+                result.student
             )
 
         );
@@ -63,7 +65,7 @@ export const getStudentById = catchAsync(
     async (req: Request, res: Response) => {
 
         const student = await studentService.getStudentById(
-            req.params.id
+            String(req.params.id)
         );
 
         return res.status(200).json(
@@ -85,7 +87,7 @@ export const updateStudent = catchAsync(
     async (req: Request, res: Response) => {
 
         const student = await studentService.updateStudent(
-            req.params.id,
+           String(req.params.id),
             req.body
         );
 
@@ -107,7 +109,7 @@ export const deleteStudent = catchAsync(
 
     async (req: Request, res: Response) => {
 
-        await studentService.deleteStudent(req.params.id);
+        await studentService.deleteStudent(String(req.params.id));
 
         return res.status(200).json(
 
@@ -131,7 +133,7 @@ export const uploadPhoto = catchAsync(
 
         const student =
             await studentService.uploadStudentPhoto(
-                req.params.id,
+               String(req.params.id),
                 req.file.path
             );
 

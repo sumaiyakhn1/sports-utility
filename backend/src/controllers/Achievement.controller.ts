@@ -47,7 +47,7 @@ export const getAllAchievements = catchAsync(async (req, res) => {
 });
 
 export const getAchievementById = catchAsync(async (req: Request, res: Response) => {
-    const data = await achievementService.getAchievementById(req.params.id);
+    const data = await achievementService.getAchievementById(String(req.params.id));
 
     res.status(200).json(
         new ApiResponse(200, "Achievement fetched successfully", data)
@@ -56,7 +56,7 @@ export const getAchievementById = catchAsync(async (req: Request, res: Response)
 
 export const updateAchievement = catchAsync(async (req: Request, res: Response) => {
     const data = await achievementService.updateAchievement(
-        req.params.id,
+        String(req.params.id),
         req.body
     );
 
@@ -66,7 +66,7 @@ export const updateAchievement = catchAsync(async (req: Request, res: Response) 
 });
 
 export const deleteAchievement = catchAsync(async (req: Request, res: Response) => {
-    await achievementService.deleteAchievement(req.params.id);
+    await achievementService.deleteAchievement(String(req.params.id));
 
     res.status(200).json(
         new ApiResponse(200, "Achievement deleted successfully")
@@ -86,7 +86,7 @@ export const uploadCertificate = catchAsync(
         const achievement =
             await achievementService.uploadCertificate(
 
-                req.params.id,
+                String(req.params.id),
 
                 req.file.path
 
